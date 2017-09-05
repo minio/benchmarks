@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workload name="Readonly-Dist-256KB-512" description="Dist 16 disk, cache off">
+  <storage type="s3" config="accesskey=minio;secretkey=minio123;proxyhost=;proxyport=;endpoint=http://minio-rr:9000;path_style_access=true" />
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="1" config="cprefix=miniotest;containers=r(1,2)" />
+    </workstage>
+    <workstage name="prepare">
+      <work type="prepare" workers="5" config="cprefix=miniotest;containers=r(1,2);objects=r(1,512);sizes=c(256)KB" />
+    </workstage>
+    <workstage name="main">
+      <work name="main" workers="512" runtime="30">
+        <operation type="read" ratio="100" config="cprefix=miniotest;containers=c(1);objects=r(1,512)" hashCheck="False"/>
+      </work>
+    </workstage>
+    <workstage name="cleanup">
+      <work type="cleanup" workers="1" config="cprefix=miniotest;containers=r(1,2);objects=r(1,512)" />
+    </workstage>
+    <workstage name="dispose">
+      <work type="dispose" workers="1" config="cprefix=miniotest;containers=r(1,2)" />
+    </workstage>
+  </workflow>
+</workload>
