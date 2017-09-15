@@ -1,4 +1,4 @@
-## Installation (Ubuntu 16.04)
+## Installation (Ubuntu 16.04) [![License: CC BY-ND 4.0](https://img.shields.io/badge/License-CC%20BY--ND%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nd/4.0/)
 
 ### Install Java 8
 ```sh
@@ -68,7 +68,7 @@ Look for &lt;storage&gt; tag attributes.
 **Start a test**:
 Pick a test such as Write test with 1024 concurrency, object size 32MiB.
 ```
-./cli.sh submit packet-baremetal_3/write/32MB/config-1024-writeonly.xml
+./cli.sh submit write/32MB/config-1024-writeonly.xml
 ```
 **Monitor a test**:
 From a browser, open http://&lt;cosbench-controller-node:19088/controller/. Then open the item under active workload, and drill down into workload, work stage and missions by clicking on “view details”.
